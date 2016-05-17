@@ -22,9 +22,9 @@ public class Player
         // -------------------------------------
 
         // ------- CONSTANTES DE ESTADO --------
-        public int STATE_MENU = 0;
-        public int STATE_MY_TURN  = 1;
-        public int STATE_HIS_TURN = 2;
+        public final int STATE_MENU = 0;
+        public final int STATE_MY_TURN  = 1;
+        public final int STATE_HIS_TURN = 2;
         // -------------------------------------
 
         // ------------- ATRIBUTOS -------------

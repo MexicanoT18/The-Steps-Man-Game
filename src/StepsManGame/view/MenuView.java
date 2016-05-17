@@ -10,5 +10,9 @@ package StepsManGame.view;
  * @author Lucas
  */
 public class MenuView {
+    ViewsMediator viewsMediator;
     
+    public MenuView(ViewsMediator viewsMediator){
+        this.viewsMediator = viewsMediator;
+    }
 }

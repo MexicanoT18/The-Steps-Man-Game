@@ -5,76 +5,135 @@
  */
 package StepsManGame.logic;
 
+import StepsManGame.systems.ExplosionSystem;
+import StepsManGame.systems.GameSystem;
+import StepsManGame.systems.PlatformSystem;
+import StepsManGame.systems.PlayerSystem;
+import StepsManGame.view.ViewsMediator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author Lucas
  */
-public class Menu
-    {
-        public final int CONTINUE = 0;
-        public final int RESTART = 1;
-        public final int EXIT = 2;
+public class Menu implements ActionListener{
+    
+    public enum Selection{
+        CONTINUE, RESTART, EXIT
+    }
 
-        private int selection;
-        InputDevice inputDevice;
-        GameSystem gameSystem;
-        private int winner;
+    private Selection selection;
+    GameSystem gameSystem;
+    PlayerSystem playerSystem;
+    PlatformSystem platformSystem;
+    ExplosionSystem explosionSystem;
+    private PlayerSystem.Players winner;
 
-        public Menu(InputDevice inputDevice, GameSystem gameSystem)
-        {
-            this.inputDevice = inputDevice;
-            this.gameSystem = gameSystem;
-            winner = PlayerSystem.NONE;
-            selection = CONTINUE;
-        }
+    public Menu() {
+        winner = PlayerSystem.Players.NONE;
+        selection = Selection.CONTINUE;
+    }
 
-        public int getSelection()
-        {
-            return selection;
-        }
+    public void initialize(GameSystem gameSystem, ViewsMediator viewsMediator, 
+            PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem) {
+        
+        this.gameSystem = gameSystem;
+        this.explosionSystem = explosionSystem;
+        this.platformSystem = platformSystem;
+        this.playerSystem = playerSystem;
+        viewsMediator.addKeyListener(new MenuTAdapter());
+    }
 
-        public void setWinner(int winner)
-        {
-            this.winner = winner;
-        }
+    public Selection getSelection() {
+        return selection;
+    }
 
-        public int getWinner()
-        {
-            return winner;
-        }
+    public void setWinner(PlayerSystem.Players winner) {
+        this.winner = winner;
+    }
 
-        public void update(GameTime gameTime)
-        {
-            if (inputDevice == null)
-                throw new NullPointerException("O método de input não foi iniciado.");
+    public PlayerSystem.Players getWinner() {
+        return winner;
+    }
 
-            CommandTable commandTable = inputDevice.processInput();
+    public boolean processCommands(KeyEvent e) {
 
-            if (commandTable.moveUp == CommandState.Released)
-            {
-                selection--;
-                if (selection < 0) selection = 2;
+        if (playerSystem.getGameState() != GameSystem.GameState.PAUSED) return false;
+        
+        int key = e.getKeyCode();
+        
+        if (key == KeyEvent.VK_UP) {
+            switch (selection) {
+                case CONTINUE:
+                    selection = Selection.EXIT;
+                    break;
+                case RESTART:
+                    selection = Selection.CONTINUE;
+                    break;
+                case EXIT:
+                    selection = Selection.RESTART;
+                    break;
+                default:
+                    break;
             }
-            if (commandTable.moveDown == CommandState.Released)
-            {
-                selection++;
-                if (selection > 2) selection = 0;
+            return true;
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+            switch (selection) {
+                case CONTINUE:
+                    selection = Selection.RESTART;
+                    break;
+                case RESTART:
+                    selection = Selection.EXIT;
+                    break;
+                case EXIT:
+                    selection = Selection.CONTINUE;
+                    break;
+                default:
+                    break;
             }
-            if (commandTable.plantSeed == CommandState.Released)
-            {
-                switch (selection)
-                {
-                    case CONTINUE:
-                        gameSystem.setGameState(GameSystem.IN_GAME);
-                        break;
-                    case RESTART:
-                        gameSystem.restart();
-                        break;
-                    case EXIT:
-                        Environment.Exit(0);
-                        break;
-                    default: break;
-                }
+            return true;
+        }
+        
+        if (key == KeyEvent.VK_SPACE){
+            switch (selection) {
+                case CONTINUE:
+                    gameSystem.setGameState(GameSystem.GameState.IN_GAME);
+                    break;
+                case RESTART:
+                    gameSystem.restart();
+                    break;
+                case EXIT:
+                    System.exit(0);
+                    break;
+                default:
+                    break;
             }
+            return true;
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+    
+    private class MenuTAdapter extends KeyAdapter {
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            processCommands(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            
         }
     }
+}

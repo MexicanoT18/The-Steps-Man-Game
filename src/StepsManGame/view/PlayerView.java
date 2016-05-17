@@ -5,10 +5,24 @@
  */
 package StepsManGame.view;
 
+import StepsManGame.logic.Player;
+
 /**
  *
  * @author Lucas
  */
-public class PlayerView {
+public class PlayerView{
+    
+    ViewsMediator viewsMediator;
+    Player attachedPlayer;
+    
+    public PlayerView(Player player, ViewsMediator viewsMediator){
+        this.attachedPlayer = player;
+        this.viewsMediator = viewsMediator;
+    }
+    
+    public void loadResources(){
+        
+    }
     
 }

@@ -6,7 +6,8 @@
 package StepsManGame.logic;
 
 import StepsManGame.systems.PlayerSystem;
-import StepsManGame.view.PlatformSystem;
+import StepsManGame.systems.PlatformSystem;
+import StepsManGame.view.ViewsMediator;
 import java.awt.Point;
 
 /**
@@ -18,17 +19,22 @@ public class Platform
 
         PlatformSystem platformSystem;
 
-        private int whosPlatform;
+        private PlayerSystem.Players whosPlatform;
         private int seeds;
         private int limit;
         private boolean isInGame;
         private Point position;
         private int detonating;
 
-        public Platform(PlatformSystem platformSystem)
-        {
+        public Platform(){
+            
+        }
+        
+        public void initialize(PlatformSystem platformSystem, ViewsMediator viewsMediator){
+            
             this.platformSystem = platformSystem;
-            whosPlatform = PlayerSystem.NONE;
+            whosPlatform = PlayerSystem.Players.NONE;
+            position = new Point(0, 0);
             seeds = 0;
             limit = -1;
             detonating = 0;
@@ -59,7 +65,7 @@ public class Platform
             this.seeds = seeds;
         }
 
-        public int getWhosPlatform()
+        public PlayerSystem.Players getWhosPlatform()
         {
             return whosPlatform;
         }
@@ -88,12 +94,12 @@ public class Platform
             else limit = 6;
         }
 
-        public void setWhosPlatform(int whosPlatform)
+        public void setWhosPlatform(PlayerSystem.Players whosPlatform)
         {
             this.whosPlatform = whosPlatform;
         }
 
-        public boolean plantSeed(int whosPlatform)
+        public boolean plantSeed(PlayerSystem.Players whosPlatform)
         {
             if (this.whosPlatform == whosPlatform)
             {
@@ -110,8 +116,6 @@ public class Platform
         public void detonate()
         {
             detonating++;
-            //seeds = 0;
             platformSystem.detonate(this);
-            //whosPlatform = PlayerSystem.NONE;
         }
     }

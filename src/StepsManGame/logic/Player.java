@@ -6,147 +6,139 @@
 package StepsManGame.logic;
 
 import StepsManGame.systems.PlayerSystem;
-import StepsManGame.view.PlatformSystem;
+import StepsManGame.view.ViewsMediator;
+import StepsManGame.systems.ExplosionSystem;
+import StepsManGame.systems.GameSystem;
+import StepsManGame.systems.PlatformSystem;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  *
  * @author Lucas
  */
-public class Player
-    {
-        // Tenta entender ai. A parte mais dificil é entender a constante de tempo
-        // tb é bom prestar atenção na relação da classe player com o bombSystem
-
-        // ------- CONSTANTES DE TEMPO ---------
-        // -------------------------------------
-
-        // ------- CONSTANTES DE ESTADO --------
-        public final int STATE_MENU = 0;
-        public final int STATE_MY_TURN  = 1;
-        public final int STATE_HIS_TURN = 2;
-        // -------------------------------------
-
-        // ------------- ATRIBUTOS -------------
-        private int state;
-        private int player;
-        private Point position;
-        // -------------------------------------
-
-        // ----------- REFERENCIAS -------------
-        private InputDevice inputDevice;
-        private PlayerSystem playerSystem;
-        private PlatformSystem platformSystem;
-        private GameSystem gameSystem;
-        // -------------------------------------
-
-        // ----------- CONSTRUTORES ------------
-        public Player(InputDevice inputDevice, int player, PlayerSystem playerSystem, PlatformSystem platformSystem, GameSystem gameSystem)
-        {
-            this.playerSystem = playerSystem;
-            this.platformSystem = platformSystem;
-            this.inputDevice = inputDevice;
-            this.gameSystem = gameSystem;
-            this.player = player;
-            if (player == PlayerSystem.PLAYER_1)
-            {
-                state = STATE_MY_TURN;
-                position = new Point(0, 0);
-            }
-            if (player == PlayerSystem.PLAYER_2)
-            {
-                state = STATE_HIS_TURN;
-                position = new Point(8,0);
-            }
-        }
-        // -------------------------------------
-
-        // -------- GETTER AND SETTER ----------
-        public int getState()
-        {
-            return state;
-        }
-
-        public void setState(int state)
-        {
-            this.state = state;
-        }
-
-        public int getPlayer()
-        {
-            return player;
-        }
-
-        public Point getPosition()
-        {
-            return position;
-        }
-        // -------------------------------------
-
-        // -------------- MÉTODOS --------------
-
-        public boolean processCommands(GameTime gameTime)
-        {
-            if (inputDevice == null)
-                throw new NullPointerException("O método de input não foi iniciado.");
-
-            CommandTable commandTable = inputDevice.processInput();
-
-            boolean successful = false;
-            int dx = 0, dy = 0;
-
-            // Process Movement Input
-            
-            if (commandTable.plantSeed == CommandState.Released && !platformSystem.getUpdatingExlosions())
-            {
-                return platformSystem.plantSeed(this);
-            }
-
-            if (commandTable.pause == CommandState.Released)
-            {
-                gameSystem.setGameState(GameSystem.PAUSED);
-            }
-
-            if (commandTable.moveUp == CommandState.Released)
-            {
-                dy = -1;
-            }
-
-            if (commandTable.moveDown == CommandState.Released)
-            {
-                dy = 1;
-            }
-            if (commandTable.moveLeft == CommandState.Released)
-            {
-                dx = -1;
-            }
-            if (commandTable.moveRight == CommandState.Released)
-            {
-                dx = 1;
-            }
-
-            if (platformSystem.isInGame(position.x + dx, position.y + dy))
-            {
-                successful = true;
-            }
-            else if ((dx == -1 || dx==1) && platformSystem.isInGame(position.x + dx, position.y -1))
-            {
-                dy = -1;
-                successful = true;
-            }
-
-            if (successful && !platformSystem.getUpdatingExlosions())
-            {
-                position.x += dx;
-                position.y += dy;
-            }
-
-            return false;
-        }
-
-        public void update(GameTime gameTime)
-        {
-        }
-        // -------------------------------------
-
+public class Player implements ActionListener {
+    
+    public enum TurnState{
+        MENU, MY_TURN, HIS_TURN
     }
+    
+    private TurnState turnState;
+    private PlayerSystem.Players player;
+    private Point position;
+    
+    private PlayerSystem playerSystem;
+    private PlatformSystem platformSystem;
+    private ExplosionSystem explosionSystem;
+    
+    public Player(){
+        
+    }
+    
+    public void initialize(PlayerSystem.Players player, PlayerSystem playerSystem,
+            ViewsMediator viewsMediator, PlatformSystem platformSystem, ExplosionSystem explosionSystem) {
+        
+        this.playerSystem = playerSystem;
+        this.player = player;
+        this.platformSystem = platformSystem;
+        this.explosionSystem = explosionSystem;
+        
+        if (player == PlayerSystem.Players.PLAYER_1) {
+            turnState = TurnState.MY_TURN;
+            position = new Point(0, 0);
+        }
+        if (player == PlayerSystem.Players.PLAYER_2) {
+            turnState = TurnState.HIS_TURN;
+            position = new Point(8, 0);
+        }
+        
+        viewsMediator.addKeyListener(new PlayerTAdapter());
+    }
+    
+    public TurnState getTurnState() {
+        return turnState;
+    }
+
+    public void setState(TurnState turnState) {
+        this.turnState = turnState;
+    }
+
+    public PlayerSystem.Players getPlayer() {
+        return player;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+    
+    public boolean processCommands(KeyEvent e) {
+
+        if (playerSystem.getGameState() != GameSystem.GameState.IN_GAME) return false;
+        
+        int key = e.getKeyCode();
+
+        boolean successful = false;
+        int dx = 0, dy = 0;
+        
+        if (key == KeyEvent.VK_LEFT) {
+            dx = -1;
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            dx = 1;
+        }
+
+        if (key == KeyEvent.VK_UP) {
+            dy = -1;
+        }
+
+        if (key == KeyEvent.VK_DOWN) {
+            dy = 1;
+        }
+        
+        if (key == KeyEvent.VK_SPACE){
+            return platformSystem.plantSeed(this);
+        }
+
+        if (key == KeyEvent.VK_ESCAPE) {
+            playerSystem.setGameState(GameSystem.GameState.PAUSED);
+        }
+
+        if (platformSystem.isInGame(position.x + dx, position.y + dy)) {
+            successful = true;
+        } else if ((dx == -1 || dx == 1) && platformSystem.isInGame(position.x + dx, position.y - 1)) {
+            dy = -1;
+            successful = true;
+        }
+
+        if (successful && !explosionSystem.getUpdatingExplosions()) {
+            position.x += dx;
+            position.y += dy;
+            playerSystem.switchTurns();
+        }
+        
+        return false;
+    }
+    
+    private class PlayerTAdapter extends KeyAdapter {
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            processCommands(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            
+        }
+    }
+
+}

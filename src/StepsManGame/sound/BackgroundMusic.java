@@ -5,10 +5,19 @@
  */
 package StepsManGame.sound;
 
+import StepsManGame.view.ViewsMediator;
+
 /**
  *
  * @author Lucas
  */
 public class BackgroundMusic {
+    
+    ViewsMediator viewsMediator;
+    
+    public BackgroundMusic(ViewsMediator viewsMediator){
+        this.viewsMediator = viewsMediator;
+    }
+    
     
 }

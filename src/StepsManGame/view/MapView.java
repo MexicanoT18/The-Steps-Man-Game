@@ -29,7 +29,6 @@ public class MapView {
     }
     
     public void draw(Graphics g){
-            System.out.println("Repainting");
         g.drawImage(background, 0, 0, viewsMediator);
     }
 }

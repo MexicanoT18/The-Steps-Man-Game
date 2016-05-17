@@ -20,10 +20,11 @@ public class ExplosionSystem {
     
     public void initialize(GameSystem gameSystem, ViewsMediator viewsMediator){
         this.gameSystem = gameSystem;
+        this.updatingExplosions = false;
     }
     
     public void detonate(Platform platform){
-        
+        System.out.println("Boom!");
     }
     
     public boolean getUpdatingExplosions(){

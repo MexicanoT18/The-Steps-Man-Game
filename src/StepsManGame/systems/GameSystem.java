@@ -44,7 +44,7 @@ public class GameSystem {
         this.viewsMediator = viewsMediator;
         
         this.platformSystem.initialize(viewsMediator, this, playerSystem, explosionSystem);
-        this.playerSystem.initialize(this, platformSystem, explosionSystem);
+        this.playerSystem.initialize(viewsMediator, this, platformSystem, explosionSystem);
         this.explosionSystem.initialize(this, viewsMediator);
         this.menu.initialize(this, viewsMediator, platformSystem, playerSystem, explosionSystem);
 

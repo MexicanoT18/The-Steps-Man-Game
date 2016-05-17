@@ -8,19 +8,14 @@ package StepsManGame.logic;
 import StepsManGame.systems.PlayerSystem;
 import StepsManGame.view.ViewsMediator;
 import StepsManGame.systems.ExplosionSystem;
-import StepsManGame.systems.GameSystem;
 import StepsManGame.systems.PlatformSystem;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  *
  * @author Lucas
  */
-public class Player implements ActionListener {
+public class Player{
     
     public enum TurnState{
         MENU, MY_TURN, HIS_TURN
@@ -55,7 +50,6 @@ public class Player implements ActionListener {
             position = new Point(8, 0);
         }
         
-        viewsMediator.addKeyListener(new PlayerTAdapter());
         viewsMediator.attachNewPlayerViewToPlayer(this);
     }
     
@@ -75,71 +69,8 @@ public class Player implements ActionListener {
         return position;
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-    }
-    
-    public boolean processCommands(KeyEvent e) {
-
-        if (playerSystem.getGameState() != GameSystem.GameState.IN_GAME) return false;
-        
-        int key = e.getKeyCode();
-
-        boolean successful = false;
-        int dx = 0, dy = 0;
-        
-        if (key == KeyEvent.VK_LEFT) {
-            dx = -1;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            dx = 1;
-        }
-
-        if (key == KeyEvent.VK_UP) {
-            dy = -1;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 1;
-        }
-        
-        if (key == KeyEvent.VK_SPACE){
-            return platformSystem.plantSeed(this);
-        }
-
-        if (key == KeyEvent.VK_ESCAPE) {
-            playerSystem.setGameState(GameSystem.GameState.PAUSED);
-        }
-
-        if (platformSystem.isInGame(position.x + dx, position.y + dy)) {
-            successful = true;
-        } else if ((dx == -1 || dx == 1) && platformSystem.isInGame(position.x + dx, position.y - 1)) {
-            dy = -1;
-            successful = true;
-        }
-
-        if (successful && !explosionSystem.getUpdatingExplosions()) {
-            position.x += dx;
-            position.y += dy;
-            playerSystem.switchTurns();
-        }
-        
-        return false;
-    }
-    
-    private class PlayerTAdapter extends KeyAdapter {
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            processCommands(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            
-        }
+    public void setPosition(Point position){
+        this.position = position;
     }
 
 }

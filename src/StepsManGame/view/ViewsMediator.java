@@ -40,8 +40,8 @@ public class ViewsMediator extends JPanel{
     GameSystem gameSystem;
     private PlayerSystem.Players whosTurn;
     
-    private final int SCREEN_WIDTH = 965;
-    private final int SCREEN_HEIGHT = 611;
+    public final int SCREEN_WIDTH = 965;
+    public final int SCREEN_HEIGHT = 611;
     
     public ViewsMediator() {
         platformViews = new HashMap<>();
@@ -50,6 +50,7 @@ public class ViewsMediator extends JPanel{
     }
     
     public void initialize(GameSystem gameSystem) {
+        
         setBackground(Color.BLACK);
         setFocusable(true);
 
@@ -77,12 +78,12 @@ public class ViewsMediator extends JPanel{
             playerView2 = view;
         }
     }
-/*
+
     public void attachNewMenuViewToMenu(Menu menu) {
-        menuView = new MenuView(menu, gameSystem);
-        menuView.LoadResources(content);
+        menuView = new MenuView(menu, this);
+        menuView.loadResources();
     }
-*/
+
     public void attachNewPlatformViewToPlatform(Platform platform) {
         PlatformView view = new PlatformView(this, platform);
         view.loadResources();
@@ -103,6 +104,10 @@ public class ViewsMediator extends JPanel{
         
         playerView1.draw(g);
         playerView2.draw(g);
+        
+        if (gameSystem.getGameState() == GameSystem.GameState.PAUSED){
+            menuView.draw(g);
+        }
     }
 
     public Image makeColorTransparent(Image im) {

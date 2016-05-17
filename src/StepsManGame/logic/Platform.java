@@ -24,7 +24,6 @@ public class Platform
         private int limit;
         private boolean isInGame;
         private Point position;
-        private int detonating;
 
         public Platform(){
             
@@ -37,23 +36,12 @@ public class Platform
             position = new Point(0, 0);
             seeds = 0;
             limit = -1;
-            detonating = 0;
             viewsMediator.attachNewPlatformViewToPlatform(this);
         }
 
         public Point getPosition()
         {
             return position;
-        }
-
-        public void setDetonating(int detonating)
-        {
-            this.detonating = detonating;
-        }
-
-        public int getDetonating()
-        {
-            return detonating;
         }
 
         public int getSeeds()
@@ -64,6 +52,7 @@ public class Platform
         public void setSeeds(int seeds)
         {
             this.seeds = seeds;
+            if (seeds == 0) whosPlatform = PlayerSystem.Players.NONE;
         }
 
         public PlayerSystem.Players getWhosPlatform()
@@ -105,7 +94,7 @@ public class Platform
             if (this.whosPlatform == whosPlatform)
             {
                 seeds++;
-                if (seeds >= limit + limit*detonating)
+                if (seeds >= limit)
                 {
                     this.detonate();
                 }
@@ -116,7 +105,6 @@ public class Platform
 
         public void detonate()
         {
-            detonating++;
             platformSystem.detonate(this);
         }
     }

@@ -26,6 +26,8 @@ public class PlatformSystem {
     
     public void initialize(ViewsMediator viewsMediator, GameSystem gameSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem) {
         this.gameSystem = gameSystem;
+        this.playerSystem = playerSystem;
+        this.explosionSystem = explosionSystem;
         platforms = new Platform[5][9];
 
         for (int i = 0; i < 5; i++) {
@@ -57,6 +59,7 @@ public class PlatformSystem {
     
     public void detonate(Platform platform) {
         explosionSystem.detonate(platform);
+        platform.setSeeds(1);
     }
 
     public PlayerSystem.Players other(PlayerSystem.Players whosPlatform) {

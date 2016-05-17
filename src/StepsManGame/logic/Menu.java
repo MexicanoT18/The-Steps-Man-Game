@@ -31,6 +31,7 @@ public class Menu implements ActionListener{
     PlatformSystem platformSystem;
     ExplosionSystem explosionSystem;
     private PlayerSystem.Players winner;
+    static MenuTAdapter adapter;
 
     public Menu() {
         winner = PlayerSystem.Players.NONE;
@@ -44,7 +45,12 @@ public class Menu implements ActionListener{
         this.explosionSystem = explosionSystem;
         this.platformSystem = platformSystem;
         this.playerSystem = playerSystem;
-        viewsMediator.addKeyListener(new MenuTAdapter());
+        
+        if (adapter == null){
+            adapter = new MenuTAdapter();
+            viewsMediator.addKeyListener(adapter);
+        }
+        viewsMediator.attachNewMenuViewToMenu(this);
     }
 
     public Selection getSelection() {
@@ -59,9 +65,9 @@ public class Menu implements ActionListener{
         return winner;
     }
 
-    public boolean processCommands(KeyEvent e) {
+    public void processCommands(KeyEvent e) {
 
-        if (playerSystem.getGameState() != GameSystem.GameState.PAUSED) return false;
+        if (gameSystem.getGameState() != GameSystem.GameState.PAUSED) return;
         
         int key = e.getKeyCode();
         
@@ -79,10 +85,10 @@ public class Menu implements ActionListener{
                 default:
                     break;
             }
-            return true;
+            return;
         }
 
-        if (key == KeyEvent.VK_DOWN) {
+        else if (key == KeyEvent.VK_DOWN) {
             switch (selection) {
                 case CONTINUE:
                     selection = Selection.RESTART;
@@ -96,10 +102,10 @@ public class Menu implements ActionListener{
                 default:
                     break;
             }
-            return true;
+            return;
         }
         
-        if (key == KeyEvent.VK_SPACE){
+        else if (key == KeyEvent.VK_SPACE){
             switch (selection) {
                 case CONTINUE:
                     gameSystem.setGameState(GameSystem.GameState.IN_GAME);
@@ -113,10 +119,10 @@ public class Menu implements ActionListener{
                 default:
                     break;
             }
-            return true;
+            return;
         }
         
-        return false;
+        return;
     }
     
     @Override

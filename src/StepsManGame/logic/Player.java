@@ -56,6 +56,7 @@ public class Player implements ActionListener {
         }
         
         viewsMediator.addKeyListener(new PlayerTAdapter());
+        viewsMediator.attachNewPlayerViewToPlayer(this);
     }
     
     public TurnState getTurnState() {

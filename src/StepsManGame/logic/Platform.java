@@ -38,6 +38,7 @@ public class Platform
             seeds = 0;
             limit = -1;
             detonating = 0;
+            viewsMediator.attachNewPlatformViewToPlatform(this);
         }
 
         public Point getPosition()

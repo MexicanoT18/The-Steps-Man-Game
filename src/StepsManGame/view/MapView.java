@@ -24,11 +24,12 @@ public class MapView {
     }
     
     public void loadResources(){
-        ImageIcon bg = new ImageIcon("Resources/bg.png");
+        ImageIcon bg = new ImageIcon("Resources/backgrounds/bg.png");
         background = bg.getImage();
     }
     
     public void draw(Graphics g){
+            System.out.println("Repainting");
         g.drawImage(background, 0, 0, viewsMediator);
     }
 }

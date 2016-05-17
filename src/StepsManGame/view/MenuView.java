@@ -49,9 +49,6 @@ public class MenuView {
         icon = new ImageIcon("Resources/menus/p2win.png");
         p2win = viewsMediator.makeColorTransparent(icon.getImage());
         
-        
-        System.out.println("WUT:" + p1win.getWidth(viewsMediator));
-        
         menupos = new Point(viewsMediator.SCREEN_WIDTH / 2, viewsMediator.SCREEN_HEIGHT / 2 - 159);
         winpos = new Point(viewsMediator.SCREEN_WIDTH / 2 - 387, viewsMediator.SCREEN_HEIGHT / 2 - 159);
     }

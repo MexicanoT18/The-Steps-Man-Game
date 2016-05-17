@@ -41,6 +41,9 @@ public class Menu implements ActionListener{
     public void initialize(GameSystem gameSystem, ViewsMediator viewsMediator, 
             PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem) {
         
+        winner = PlayerSystem.Players.NONE;
+        selection = Selection.CONTINUE;
+        
         this.gameSystem = gameSystem;
         this.explosionSystem = explosionSystem;
         this.platformSystem = platformSystem;
@@ -121,8 +124,6 @@ public class Menu implements ActionListener{
             }
             return;
         }
-        
-        return;
     }
     
     @Override

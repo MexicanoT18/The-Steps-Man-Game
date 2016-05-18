@@ -58,6 +58,7 @@ public class ViewsMediator extends JPanel{
         
         this.gameSystem = gameSystem;
         mapView.loadResources();
+        bgm.loadResources();
     }
     
     public void restart() {
@@ -94,6 +95,8 @@ public class ViewsMediator extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        bgm.play();
 
         mapView.draw(g);
         

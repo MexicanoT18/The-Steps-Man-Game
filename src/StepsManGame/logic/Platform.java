@@ -42,6 +42,7 @@ public class Platform
         public Point getPosition()
         {
             return position;
+            /// huehuehuehuehue
         }
 
         public int getSeeds()

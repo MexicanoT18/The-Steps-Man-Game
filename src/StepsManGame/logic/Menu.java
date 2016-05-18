@@ -22,7 +22,7 @@ import java.awt.event.KeyEvent;
 public class Menu implements ActionListener{
     
     public enum Selection{
-        CONTINUE, RESTART, EXIT
+        CONTINUE, SPLIT, HOST, CLIENT, EXIT
     }
 
     private Selection selection;
@@ -79,11 +79,17 @@ public class Menu implements ActionListener{
                 case CONTINUE:
                     selection = Selection.EXIT;
                     break;
-                case RESTART:
+                case SPLIT:
                     selection = Selection.CONTINUE;
                     break;
+                case HOST:
+                    selection = Selection.SPLIT;
+                    break;
+                case CLIENT:
+                    selection = Selection.HOST;
+                    break;
                 case EXIT:
-                    selection = Selection.RESTART;
+                    selection = Selection.CLIENT;
                     break;
                 default:
                     break;
@@ -94,9 +100,15 @@ public class Menu implements ActionListener{
         else if (key == KeyEvent.VK_DOWN) {
             switch (selection) {
                 case CONTINUE:
-                    selection = Selection.RESTART;
+                    selection = Selection.SPLIT;
                     break;
-                case RESTART:
+                case SPLIT:
+                    selection = Selection.HOST;
+                    break;
+                case HOST:
+                    selection = Selection.CLIENT;
+                    break;
+                case CLIENT:
                     selection = Selection.EXIT;
                     break;
                 case EXIT:
@@ -113,7 +125,7 @@ public class Menu implements ActionListener{
                 case CONTINUE:
                     gameSystem.setGameState(GameSystem.GameState.IN_GAME);
                     break;
-                case RESTART:
+                case SPLIT:
                     gameSystem.restart();
                     break;
                 case EXIT:

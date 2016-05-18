@@ -20,7 +20,9 @@ public class MenuView {
 
     ViewsMediator viewsMediator;
     private Image CONTINUE;
-    private Image RESTART;
+    private Image SPLITSCREEN;
+    private Image HOST;
+    private Image CLIENT;
     private Image EXIT;
     private Image p1win;
     private Image p2win;
@@ -37,8 +39,14 @@ public class MenuView {
         ImageIcon icon = new ImageIcon("Resources/menus/continue.png");
         CONTINUE = viewsMediator.makeColorTransparent(icon.getImage());
         
-        icon = new ImageIcon("Resources/menus/restart.png");
-        RESTART = viewsMediator.makeColorTransparent(icon.getImage());
+        icon = new ImageIcon("Resources/menus/splitscreen.png");
+        SPLITSCREEN = viewsMediator.makeColorTransparent(icon.getImage());
+        
+        icon = new ImageIcon("Resources/menus/host.png");
+        HOST = viewsMediator.makeColorTransparent(icon.getImage());
+        
+        icon = new ImageIcon("Resources/menus/client.png");
+        CLIENT = viewsMediator.makeColorTransparent(icon.getImage());
         
         icon = new ImageIcon("Resources/menus/exit.png");
         EXIT = viewsMediator.makeColorTransparent(icon.getImage());
@@ -49,8 +57,8 @@ public class MenuView {
         icon = new ImageIcon("Resources/menus/p2win.png");
         p2win = viewsMediator.makeColorTransparent(icon.getImage());
         
-        menupos = new Point(viewsMediator.SCREEN_WIDTH / 2, viewsMediator.SCREEN_HEIGHT / 2 - 159);
-        winpos = new Point(viewsMediator.SCREEN_WIDTH / 2 - 387, viewsMediator.SCREEN_HEIGHT / 2 - 159);
+        menupos = new Point(40 + 305, viewsMediator.SCREEN_HEIGHT / 2 - 250);
+        winpos = new Point(40, viewsMediator.SCREEN_HEIGHT / 2 - 250);
     }
 
     public void draw(Graphics g) {
@@ -63,8 +71,12 @@ public class MenuView {
         
         if (attachedMenu.getSelection() == Menu.Selection.CONTINUE)
                 g.drawImage(CONTINUE, menupos.x, menupos.y, viewsMediator);
-        if (attachedMenu.getSelection() == Menu.Selection.RESTART)
-                g.drawImage(RESTART, menupos.x, menupos.y, viewsMediator);
+        if (attachedMenu.getSelection() == Menu.Selection.SPLIT)
+                g.drawImage(SPLITSCREEN, menupos.x, menupos.y, viewsMediator);
+        if (attachedMenu.getSelection() == Menu.Selection.HOST)
+                g.drawImage(HOST, menupos.x, menupos.y, viewsMediator);
+        if (attachedMenu.getSelection() == Menu.Selection.CLIENT)
+                g.drawImage(CLIENT, menupos.x, menupos.y, viewsMediator);
         if (attachedMenu.getSelection() == Menu.Selection.EXIT)
                 g.drawImage(EXIT, menupos.x, menupos.y, viewsMediator);
     }

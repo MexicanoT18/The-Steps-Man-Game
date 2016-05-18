@@ -15,6 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -132,10 +135,22 @@ public class Menu implements ActionListener{
                     gameSystem.restart();
                     break;
                 case HOST:
-                    onlineSystem.createServer();
+                {
+                    try {
+                        onlineSystem.createServer();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
                 case CLIENT:
-                    onlineSystem.createClient();
+                {
+                    try {
+                        onlineSystem.createClient();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
                 case EXIT:
                     System.exit(0);

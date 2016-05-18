@@ -128,6 +128,10 @@ public class Menu implements ActionListener{
                 case SPLIT:
                     gameSystem.restart();
                     break;
+                case HOST:
+                    break;
+                case CLIENT:
+                    break;
                 case EXIT:
                     System.exit(0);
                     break;

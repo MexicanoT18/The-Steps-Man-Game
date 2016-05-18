@@ -54,18 +54,20 @@ public class PlayerSystem implements ActionListener {
         if (onlineSystem.getStatus()){
             if (onlineSystem.isHost()){
                 if (player1.getTurnState() == Player.TurnState.MY_TURN) {
+                    onlineSystem.respondClient(player1.getPosition());
                     player1.setState(Player.TurnState.HIS_TURN);
                     player2.setState(Player.TurnState.MY_TURN);
-                    //requisitar prox jogada do cliente
+                    onlineSystem.requestClient(); //requisitar prox jogada do cliente
                     player1.setState(Player.TurnState.MY_TURN);
                     player2.setState(Player.TurnState.HIS_TURN);
                 }
             }
             else {
                 if (player2.getTurnState() == Player.TurnState.MY_TURN) {
+                    onlineSystem.respondServer(player2.getPosition());
                     player2.setState(Player.TurnState.HIS_TURN);
                     player1.setState(Player.TurnState.MY_TURN);
-                    //requisitar prox jogada do host
+                    onlineSystem.requestServer(); //requisitar prox jogada do host
                     player2.setState(Player.TurnState.MY_TURN);
                     player1.setState(Player.TurnState.HIS_TURN);
                 }
@@ -92,6 +94,20 @@ public class PlayerSystem implements ActionListener {
         } else if (who == Players.PLAYER_2) {
             player2 = player;
         }
+    }
+    
+    public void setPoint(int player, Point point){
+        if (player == 1)
+            player1.setPosition(point);
+        else
+            player2.setPosition(point);
+    }
+    
+    public void plantSeed(int player){
+        if (player == 1)
+            platformSystem.plantSeed(player1);
+        else
+            platformSystem.plantSeed(player2);
     }
     
     @Override

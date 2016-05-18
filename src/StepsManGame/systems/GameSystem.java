@@ -7,6 +7,7 @@ package StepsManGame.systems;
 
 import StepsManGame.logic.Menu;
 import StepsManGame.view.ViewsMediator;
+import java.awt.Point;
 
 /**
  *
@@ -65,7 +66,15 @@ public class GameSystem {
     public void setWinner(PlayerSystem.Players winner) {
         this.winner = winner;
     }
-
+    
+    public void setPoint(int player, Point point){
+        playerSystem.setPoint(player, point);
+    }
+    
+    public void plantSeed(int player){
+        playerSystem.plantSeed(player);
+    }
+    
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }

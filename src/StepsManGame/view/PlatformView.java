@@ -34,8 +34,8 @@ public class PlatformView {
 
     private Point[][] positions;
 
-    ViewsMediator viewsMediator;
-    Platform attachedPlatform;
+    private ViewsMediator viewsMediator;
+    private Platform attachedPlatform;
 
     public PlatformView(ViewsMediator viewsMediator, Platform platform) {
         this.viewsMediator = viewsMediator;

@@ -11,7 +11,7 @@ package StepsManGame.systems;
  */
 public class OnlineSystem {
     
-    GameSystem gameSystem;
+    private GameSystem gameSystem;
     
     public OnlineSystem(){
         

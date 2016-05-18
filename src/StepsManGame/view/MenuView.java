@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  */
 public class MenuView {
 
-    ViewsMediator viewsMediator;
+    private ViewsMediator viewsMediator;
     private Image CONTINUE;
     private Image SPLITSCREEN;
     private Image HOST;

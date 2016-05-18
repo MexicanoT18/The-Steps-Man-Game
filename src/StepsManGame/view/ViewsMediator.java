@@ -30,14 +30,14 @@ import javax.swing.JPanel;
  */
 public class ViewsMediator extends JPanel{
 
-    MapView mapView;
-    PlayerView playerView1;
-    PlayerView playerView2;
-    Map<Platform, PlatformView> platformViews;
-    MenuView menuView;
-    BackgroundMusic bgm;
+    private MapView mapView;
+    private PlayerView playerView1;
+    private PlayerView playerView2;
+    private Map<Platform, PlatformView> platformViews;
+    private MenuView menuView;
+    private BackgroundMusic bgm;
     
-    GameSystem gameSystem;
+    private GameSystem gameSystem;
     private PlayerSystem.Players whosTurn;
     
     public final int SCREEN_WIDTH = 965;
@@ -63,10 +63,6 @@ public class ViewsMediator extends JPanel{
     
     public void restart() {
         platformViews = new HashMap<>();
-    }
-
-    private List<PlatformView> getPlatformViews() {
-        return new ArrayList<PlatformView>(platformViews.values());
     }
 
     public void attachNewPlayerViewToPlayer(Player player) {

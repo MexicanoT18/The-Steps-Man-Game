@@ -18,10 +18,10 @@ import sun.audio.AudioStream;
  */
 public class BackgroundMusic {
     
-    ViewsMediator viewsMediator;
-    AudioStream st1;
-    AudioStream st2;
-    final int numSongs = 1;
+    private ViewsMediator viewsMediator;
+    private AudioStream st1;
+    private AudioStream st2;
+    private final int numSongs = 1;
     
     public BackgroundMusic(ViewsMediator viewsMediator){
         this.viewsMediator = viewsMediator;

@@ -6,7 +6,6 @@
 package StepsManGame.systems;
 import StepsManGame.logic.Platform;
 import StepsManGame.logic.Player;
-import StepsManGame.systems.GameSystem;
 import StepsManGame.view.ViewsMediator;
 
 /**
@@ -15,10 +14,10 @@ import StepsManGame.view.ViewsMediator;
  */
 public class PlatformSystem {
 
-    Platform [][] platforms;
-    GameSystem gameSystem;
-    ExplosionSystem explosionSystem;
-    PlayerSystem playerSystem;
+    private Platform [][] platforms;
+    private GameSystem gameSystem;
+    private ExplosionSystem explosionSystem;
+    private PlayerSystem playerSystem;
 
     public PlatformSystem() {
         

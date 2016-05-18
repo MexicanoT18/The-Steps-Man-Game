@@ -14,7 +14,7 @@ import StepsManGame.logic.Platform;
  */
 public class ExplosionSystem {
     
-    GameSystem gameSystem;
+    private GameSystem gameSystem;
     
     private boolean updatingExplosions;
     

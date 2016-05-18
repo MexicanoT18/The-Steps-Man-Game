@@ -18,8 +18,8 @@ import javax.swing.ImageIcon;
  */
 public class PlayerView{
     
-    ViewsMediator viewsMediator;
-    Player attachedPlayer;
+    private ViewsMediator viewsMediator;
+    private Player attachedPlayer;
     
     private Image player;
 

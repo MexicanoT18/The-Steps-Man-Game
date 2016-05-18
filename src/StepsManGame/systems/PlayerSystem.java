@@ -19,11 +19,11 @@ import java.awt.event.KeyEvent;
  */
 public class PlayerSystem implements ActionListener {
     
-    GameSystem gameSystem;
-    PlatformSystem platformSystem;
-    ExplosionSystem explosionSystem;
+    private GameSystem gameSystem;
+    private PlatformSystem platformSystem;
+    private ExplosionSystem explosionSystem;
     
-    static PlayerTAdapter adapter;
+    private static PlayerTAdapter adapter;
     
     public enum Players{
         PLAYER_1, NONE, PLAYER_2

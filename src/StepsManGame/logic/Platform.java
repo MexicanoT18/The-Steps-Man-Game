@@ -17,7 +17,7 @@ import java.awt.Point;
 public class Platform
     {
 
-        PlatformSystem platformSystem;
+        private PlatformSystem platformSystem;
 
         private PlayerSystem.Players whosPlatform;
         private int seeds;

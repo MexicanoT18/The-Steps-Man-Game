@@ -26,12 +26,12 @@ public class Menu implements ActionListener{
     }
 
     private Selection selection;
-    GameSystem gameSystem;
-    PlayerSystem playerSystem;
-    PlatformSystem platformSystem;
-    ExplosionSystem explosionSystem;
+    private GameSystem gameSystem;
+    private PlayerSystem playerSystem;
+    private PlatformSystem platformSystem;
+    private ExplosionSystem explosionSystem;
     private PlayerSystem.Players winner;
-    static MenuTAdapter adapter;
+    private static MenuTAdapter adapter;
 
     public Menu() {
         winner = PlayerSystem.Players.NONE;

@@ -17,7 +17,7 @@ public class MapView {
     
     private Image background;
     
-    ViewsMediator viewsMediator;
+    private ViewsMediator viewsMediator;
     
     public MapView(ViewsMediator viewsMediator){
         this.viewsMediator = viewsMediator;

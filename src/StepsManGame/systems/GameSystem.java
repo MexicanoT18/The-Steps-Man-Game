@@ -14,13 +14,13 @@ import StepsManGame.view.ViewsMediator;
  */
 public class GameSystem {
     
-    ViewsMediator viewsMediator;
-    OnlineSystem onlineSystem;
+    private ViewsMediator viewsMediator;
+    private OnlineSystem onlineSystem;
 
-    PlayerSystem playerSystem;
-    PlatformSystem platformSystem;
-    ExplosionSystem explosionSystem;
-    Menu menu;
+    private PlayerSystem playerSystem;
+    private PlatformSystem platformSystem;
+    private ExplosionSystem explosionSystem;
+    private Menu menu;
 
     public enum GameState {
         IN_GAME, PAUSED

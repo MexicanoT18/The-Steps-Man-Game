@@ -15,22 +15,24 @@ import java.awt.Point;
 public class Explosion implements Runnable{
     
     private Platform platform;
+    private static int stack_counter = 0;
     
     public Explosion (Platform platform){
         this.platform = platform;
     }
     
     public void run(){
-        Point pos = platform.getPosition();
-        //System.out.println ("Boom at " + pos.x + " " + pos.y);
+        if (stack_counter > 15) return;
+        stack_counter++;
         
-        //System.out.println (platform.getAdjacent().size());
+        Point pos = platform.getPosition();
         
         for (Platform adj : platform.getAdjacent()){
             Point pos2 = adj.getPosition();
-            System.out.println ("FOI PRA " + pos2.x + " " + pos2.y);
             adj.plantSeed(platform.getWhosPlatform());
         }
+        
+        stack_counter--;
     }
     
 }

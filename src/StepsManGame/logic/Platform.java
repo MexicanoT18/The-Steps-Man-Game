@@ -105,8 +105,8 @@ public class Platform
             }
             
             else {
-                seeds = 0;
-                this.whosPlatform = PlayerSystem.Players.NONE;
+                seeds = 1;
+                this.whosPlatform = whosPlatform;
             }
             
             return false;

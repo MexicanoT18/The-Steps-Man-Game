@@ -64,9 +64,6 @@ public class PlatformSystem {
         platforms[0][0].plantSeed(PlayerSystem.Players.PLAYER_1);
         platforms[0][8].setWhosPlatform(PlayerSystem.Players.PLAYER_2);
         platforms[0][8].plantSeed(PlayerSystem.Players.PLAYER_2);
-        
-        //if (isInGame(7, 1)) System.out.println ("ESTA CERTO!");
-        //else System.out.println ("ESTA ERRADO!");
     }
     
     public boolean isInGame(int x, int y) {

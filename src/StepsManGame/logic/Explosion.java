@@ -22,7 +22,7 @@ public class Explosion implements Runnable{
     }
     
     public void run(){
-        if (stack_counter > 15) return;
+        if (stack_counter > 50) return;
         stack_counter++;
         
         Point pos = platform.getPosition();
@@ -31,6 +31,8 @@ public class Explosion implements Runnable{
             Point pos2 = adj.getPosition();
             adj.plantSeed(platform.getWhosPlatform());
         }
+        
+        platform.setSeeds(0);
         
         stack_counter--;
     }

@@ -82,7 +82,6 @@ public class PlatformSystem {
     
     public void detonate(Platform platform) {
         explosionSystem.detonate(platform);
-        platform.setSeeds(1);
     }
 
     public PlayerSystem.Players other(PlayerSystem.Players whosPlatform) {

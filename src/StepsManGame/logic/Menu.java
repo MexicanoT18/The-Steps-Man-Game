@@ -132,11 +132,9 @@ public class Menu implements ActionListener{
                     gameSystem.restart();
                     break;
                 case HOST:
-                    onlineSystem.setOnline();
                     onlineSystem.createServer();
                     break;
                 case CLIENT:
-                    onlineSystem.setOnline();
                     onlineSystem.createClient();
                     break;
                 case EXIT:

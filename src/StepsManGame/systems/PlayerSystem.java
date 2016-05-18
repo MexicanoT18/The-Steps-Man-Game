@@ -52,7 +52,24 @@ public class PlayerSystem implements ActionListener {
     
     public void switchTurns() {
         if (onlineSystem.getStatus()){
-            
+            if (onlineSystem.isHost()){
+                if (player1.getTurnState() == Player.TurnState.MY_TURN) {
+                    player1.setState(Player.TurnState.HIS_TURN);
+                    player2.setState(Player.TurnState.MY_TURN);
+                    //requisitar prox jogada do cliente
+                    player1.setState(Player.TurnState.MY_TURN);
+                    player2.setState(Player.TurnState.HIS_TURN);
+                }
+            }
+            else {
+                if (player2.getTurnState() == Player.TurnState.MY_TURN) {
+                    player2.setState(Player.TurnState.HIS_TURN);
+                    player1.setState(Player.TurnState.MY_TURN);
+                    //requisitar prox jogada do host
+                    player2.setState(Player.TurnState.MY_TURN);
+                    player1.setState(Player.TurnState.HIS_TURN);
+                }
+            }
         }
         else {
             if (player1.getTurnState() == Player.TurnState.MY_TURN) {

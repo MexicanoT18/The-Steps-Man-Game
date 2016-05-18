@@ -16,9 +16,9 @@ import javax.swing.JFrame;
  */
 public class GameApp extends JFrame{
     
-    GameSystem gameSystem;
-    ViewsMediator viewsMediator;
-    OnlineSystem onlineSystem;
+    private GameSystem gameSystem;
+    private ViewsMediator viewsMediator;
+    private OnlineSystem onlineSystem;
     
     public GameApp() {
         

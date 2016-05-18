@@ -43,14 +43,16 @@ public class OnlineSystem {
         System.out.println("Conexão estabelecida!");
         output_s = new DataOutputStream(socket_s.getOutputStream());
         input_s = new DataInputStream(socket_s.getInputStream());
+        System.out.println("oie");
     }
     
     public void requestServer(){
         String xy;
         int x = 0, y = 0;
-        Point point = null;
+        Point point;
         //receber do servidor sua jogada
         xy = input_r.toString();
+        System.out.println("recebeu a jogada do servidor");
         //setar o point do player1
         switch (xy.charAt(0)){
             case '0':
@@ -98,11 +100,10 @@ public class OnlineSystem {
                 y=8;
                 break;
         }
-        point.setLocation(x,y);
+        point = new Point(x,y);
         gameSystem.setPoint(1, point);
         //efetuar a jogada com plantSeed
         gameSystem.plantSeed(1);
-        
     }
     
     public void respondClient(Point position_s){
@@ -117,6 +118,7 @@ public class OnlineSystem {
         
         try {
             output_s.writeChars(response);
+            System.out.println("passou a resposta pro cliente");
         } catch (IOException ex) {
             Logger.getLogger(OnlineSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,18 +128,22 @@ public class OnlineSystem {
         status = true;
         hosting = false;
         
+        System.out.println("Criando cliente.");
         socket_r = new Socket("localhost", 3323);
         output_r = new DataOutputStream(socket_r.getOutputStream());
         input_r = new DataInputStream(socket_r.getInputStream());
+        System.out.println("aham");
         
     }
     
     public void requestClient(){
         String xy;
         int x = 0, y = 0;
-        Point point = null;
+        Point point;
         //receber do cliente sua jogada
         xy = input_s.toString();
+        System.out.println("recebeu a jogada do cliente");
+        System.out.println(xy);
         //setar o point do player2
         switch (xy.charAt(0)){
             case '0':
@@ -185,7 +191,7 @@ public class OnlineSystem {
                 y=8;
                 break;
         }
-        point.setLocation(x,y);
+        point = new Point(x,y);
         gameSystem.setPoint(2, point);
         //efetuar a jogada com plantSeed
         gameSystem.plantSeed(2);
@@ -203,6 +209,7 @@ public class OnlineSystem {
         
         try {
             output_r.writeChars(response);
+            System.out.println("passou a resposta pro servidor");
         } catch (IOException ex) {
             Logger.getLogger(OnlineSystem.class.getName()).log(Level.SEVERE, null, ex);
         }

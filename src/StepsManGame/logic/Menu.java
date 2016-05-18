@@ -54,6 +54,7 @@ public class Menu implements ActionListener{
         this.explosionSystem = explosionSystem;
         this.platformSystem = platformSystem;
         this.playerSystem = playerSystem;
+        this.onlineSystem = onlineSystem;
         
         if (adapter == null){
             adapter = new MenuTAdapter();

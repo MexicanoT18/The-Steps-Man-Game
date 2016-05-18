@@ -55,6 +55,7 @@ public class PlayerSystem implements ActionListener {
             if (onlineSystem.isHost()){
                 if (player1.getTurnState() == Player.TurnState.MY_TURN) {
                     onlineSystem.respondClient(player1.getPosition());
+                    System.out.println("passou mesmo");
                     player1.setState(Player.TurnState.HIS_TURN);
                     player2.setState(Player.TurnState.MY_TURN);
                     onlineSystem.requestClient(); //requisitar prox jogada do cliente
@@ -65,6 +66,7 @@ public class PlayerSystem implements ActionListener {
             else {
                 if (player2.getTurnState() == Player.TurnState.MY_TURN) {
                     onlineSystem.respondServer(player2.getPosition());
+                    System.out.println("de verdade");
                     player2.setState(Player.TurnState.HIS_TURN);
                     player1.setState(Player.TurnState.MY_TURN);
                     onlineSystem.requestServer(); //requisitar prox jogada do host

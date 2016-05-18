@@ -5,6 +5,7 @@
  */
 package StepsManGame.systems;
 
+import StepsManGame.logic.Explosion;
 import StepsManGame.view.ViewsMediator;
 import StepsManGame.logic.Platform;
 
@@ -24,7 +25,8 @@ public class ExplosionSystem {
     }
     
     public void detonate(Platform platform){
-        System.out.println("Boom!");
+        Thread thread = new Thread (new Explosion(platform));
+        thread.start();
     }
     
     public boolean getUpdatingExplosions(){

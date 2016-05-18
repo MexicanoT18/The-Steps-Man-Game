@@ -9,6 +9,7 @@ import StepsManGame.systems.PlayerSystem;
 import StepsManGame.systems.PlatformSystem;
 import StepsManGame.view.ViewsMediator;
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Platform
         private int limit;
         private boolean isInGame;
         private Point position;
+        private ArrayList<Platform> adjacent;
 
         public Platform(){
             
@@ -36,6 +38,7 @@ public class Platform
             position = new Point(0, 0);
             seeds = 0;
             limit = -1;
+            adjacent = new ArrayList<Platform>();
             viewsMediator.attachNewPlatformViewToPlatform(this);
         }
 
@@ -101,11 +104,20 @@ public class Platform
                 }
                 return true;
             }
+            
             return false;
         }
 
         public void detonate()
         {
             platformSystem.detonate(this);
+        }
+        
+        public void addAdjacentPlatform (Platform platform){
+            adjacent.add(platform);
+        }
+        
+        public ArrayList<Platform> getAdjacent(){
+            return adjacent;
         }
     }

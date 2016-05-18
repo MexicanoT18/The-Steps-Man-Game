@@ -22,7 +22,8 @@ public class PlayerSystem implements ActionListener {
     private GameSystem gameSystem;
     private PlatformSystem platformSystem;
     private ExplosionSystem explosionSystem;
-    
+    private OnlineSystem onlineSystem;
+            
     private static PlayerTAdapter adapter;
     
     public enum Players{
@@ -37,10 +38,11 @@ public class PlayerSystem implements ActionListener {
         player2 = new Player();
     }
     
-    public void initialize(ViewsMediator viewsMediator, GameSystem gameSystem, PlatformSystem platformSystem, ExplosionSystem explosionSystem){
+    public void initialize(ViewsMediator viewsMediator, GameSystem gameSystem, PlatformSystem platformSystem, ExplosionSystem explosionSystem, OnlineSystem onlineSystem){
         this.gameSystem = gameSystem;
         this.platformSystem = platformSystem;
         this.explosionSystem = explosionSystem;
+        this.onlineSystem = onlineSystem;
         
         if (adapter == null){
             adapter = new PlayerTAdapter();
@@ -49,12 +51,17 @@ public class PlayerSystem implements ActionListener {
     }
     
     public void switchTurns() {
-        if (player1.getTurnState() == Player.TurnState.MY_TURN) {
-            player1.setState(Player.TurnState.HIS_TURN);
-            player2.setState(Player.TurnState.MY_TURN);
-        } else if (player2.getTurnState() == Player.TurnState.MY_TURN) {
-            player2.setState(Player.TurnState.HIS_TURN);
-            player1.setState(Player.TurnState.MY_TURN);
+        if (onlineSystem.getStatus()){
+            
+        }
+        else {
+            if (player1.getTurnState() == Player.TurnState.MY_TURN) {
+                player1.setState(Player.TurnState.HIS_TURN);
+                player2.setState(Player.TurnState.MY_TURN);
+            } else if (player2.getTurnState() == Player.TurnState.MY_TURN) {
+                player2.setState(Player.TurnState.HIS_TURN);
+                player1.setState(Player.TurnState.MY_TURN);
+            }
         }
     }
 

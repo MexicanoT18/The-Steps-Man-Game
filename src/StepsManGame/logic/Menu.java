@@ -7,6 +7,7 @@ package StepsManGame.logic;
 
 import StepsManGame.systems.ExplosionSystem;
 import StepsManGame.systems.GameSystem;
+import StepsManGame.systems.OnlineSystem;
 import StepsManGame.systems.PlatformSystem;
 import StepsManGame.systems.PlayerSystem;
 import StepsManGame.view.ViewsMediator;
@@ -28,6 +29,7 @@ public class Menu implements ActionListener{
     private Selection selection;
     private GameSystem gameSystem;
     private PlayerSystem playerSystem;
+    private OnlineSystem onlineSystem;
     private PlatformSystem platformSystem;
     private ExplosionSystem explosionSystem;
     private PlayerSystem.Players winner;
@@ -39,7 +41,8 @@ public class Menu implements ActionListener{
     }
 
     public void initialize(GameSystem gameSystem, ViewsMediator viewsMediator, 
-            PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem) {
+            PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem,
+            OnlineSystem onlineSystem) {
         
         winner = PlayerSystem.Players.NONE;
         selection = Selection.CONTINUE;
@@ -129,8 +132,12 @@ public class Menu implements ActionListener{
                     gameSystem.restart();
                     break;
                 case HOST:
+                    onlineSystem.setOnline();
+                    onlineSystem.createServer();
                     break;
                 case CLIENT:
+                    onlineSystem.setOnline();
+                    onlineSystem.createClient();
                     break;
                 case EXIT:
                     System.exit(0);

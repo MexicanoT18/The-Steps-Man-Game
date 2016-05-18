@@ -37,10 +37,36 @@ public class PlatformSystem {
                 platforms[i][j].setLimit(i, j);
             }
         }
+        
+        for (int i=0; i<5; i++){
+            for (int j=0; j<9; j++){
+                int[] ai_l4 = {-1, -1, 0, 0, 1, 1};
+                int[] aj_l4 = {-1, 0, -1, 1, 0, 1};
+                int[] ai_e4 = {-1, -1, -1, 0, 0, 1};
+                int[] aj_e4 = {-1, 0, 1, -1, 1, 0};
+                int[] ai_b4 = {-1, -1, 0, 0, 1, 1};
+                int[] aj_b4 = {0, 1, -1, 1, -1, 0};
+                
+                int[] ai, aj;
+                
+                if (j < 4){ai = ai_l4; aj = aj_l4;}
+                else if (j == 4){ai = ai_e4; aj = aj_e4;}
+                else {ai = ai_b4; aj = aj_b4;}
+                
+                for (int k=0; k<6; k++){
+                    int pi = i + ai[k], pj = j + aj[k];
+                    if (isInGame(pj, pi))
+                        platforms[i][j].addAdjacentPlatform(platforms[pi][pj]);
+                }
+            }
+        }
         platforms[0][0].setWhosPlatform(PlayerSystem.Players.PLAYER_1);
         platforms[0][0].plantSeed(PlayerSystem.Players.PLAYER_1);
         platforms[0][8].setWhosPlatform(PlayerSystem.Players.PLAYER_2);
         platforms[0][8].plantSeed(PlayerSystem.Players.PLAYER_2);
+        
+        //if (isInGame(7, 1)) System.out.println ("ESTA CERTO!");
+        //else System.out.println ("ESTA ERRADO!");
     }
     
     public boolean isInGame(int x, int y) {

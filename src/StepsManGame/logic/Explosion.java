@@ -5,6 +5,7 @@
  */
 package StepsManGame.logic;
 
+import StepsManGame.systems.PlayerSystem;
 import java.awt.Point;
 
 /**
@@ -21,7 +22,15 @@ public class Explosion implements Runnable{
     
     public void run(){
         Point pos = platform.getPosition();
-        System.out.println ("Boom at " + pos.x + " " + pos.y);
+        //System.out.println ("Boom at " + pos.x + " " + pos.y);
+        
+        //System.out.println (platform.getAdjacent().size());
+        
+        for (Platform adj : platform.getAdjacent()){
+            Point pos2 = adj.getPosition();
+            System.out.println ("FOI PRA " + pos2.x + " " + pos2.y);
+            adj.plantSeed(platform.getWhosPlatform());
+        }
     }
     
 }

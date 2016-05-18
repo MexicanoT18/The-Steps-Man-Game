@@ -73,4 +73,8 @@ public class GameSystem {
     public GameState getGameState() {
         return gameState;
     }
+    
+    public int checkWinner(){
+        return platformSystem.checkWinner();
+    }
 }

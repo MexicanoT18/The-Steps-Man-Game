@@ -48,8 +48,11 @@ public class GameApp extends JFrame{
             } catch (Exception e){
                 
             }
+            
+            int winner = gameSystem.checkWinner();
+            if (winner != 0)
+                System.out.println ("WINNER IS PLAYER " + winner);
         }
-        
     }
     
 }

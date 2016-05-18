@@ -101,4 +101,21 @@ public class PlatformSystem {
     public Platform[][] getPlatforms() {
         return platforms;
     }
+    
+    public int checkWinner(){
+        boolean p1isDead = true, p2isDead = true;
+        
+        for (int i=0; i<5; i++){
+            for (int j=0; j<9; j++){
+                if (platforms[i][j].getWhosPlatform() == PlayerSystem.Players.PLAYER_1)
+                    p1isDead = false;
+                else if (platforms[i][j].getWhosPlatform() == PlayerSystem.Players.PLAYER_2)
+                    p2isDead = false;
+            }
+        }
+        
+        if (p1isDead) return 2;
+        if (p2isDead) return 1;
+        return 0;
+    }
 }

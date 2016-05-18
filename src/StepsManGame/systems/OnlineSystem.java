@@ -12,9 +12,26 @@ package StepsManGame.systems;
 public class OnlineSystem {
     
     private GameSystem gameSystem;
+    private boolean status;
     
     public OnlineSystem(){
+        status = false;
+    }
+    
+    public void setOnline(){
+        status = true;
+    }
+    
+    public void createServer(){
         
+    }
+    
+    public void createClient(){
+        
+    }
+    
+    public boolean getStatus(){
+        return status;
     }
     
     public void initialize(GameSystem gameSystem) {

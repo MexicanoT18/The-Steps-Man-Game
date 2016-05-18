@@ -108,7 +108,7 @@ public class Platform
             return false;
         }
 
-        public void detonate()
+        public synchronized void detonate()
         {
             platformSystem.detonate(this);
         }

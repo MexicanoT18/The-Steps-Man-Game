@@ -104,11 +104,6 @@ public class Platform
                 return true;
             }
             
-            else {
-                seeds = 1;
-                this.whosPlatform = whosPlatform;
-            }
-            
             return false;
         }
 

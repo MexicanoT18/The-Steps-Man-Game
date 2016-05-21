@@ -2,29 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/systems/PlatformSystem.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/PlayerView.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/systems/ExplosionSystem.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/ExplosionView.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/sound/BackgroundMusic.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/systems/PlayerSystem.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/ViewsMediator.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/Main.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/PlatformView.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/logic/Platform.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/logic/Player.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/MenuView.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/view/MapView.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/systems/OnlineSystem.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/systems/GameSystem.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/logic/Menu.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/logic/Explosion.java</file>
-            <file>file:/C:/Users/dv7/Documents/CES-22/The-Steps-Man-Game/src/StepsManGame/GameApp.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/systems/PlayerSystem.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/systems/GameSystem.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/systems/PlatformSystem.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/logic/Player.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/systems/OnlineSystem.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/logic/Menu.java</file>
+            <file>file:/C:/Users/Gabriela/Documents/NetBeansProjects/Projeto%202/src/StepsManGame/logic/Platform.java</file>
         </group>
-=======
-        <group/>
->>>>>>> threads
     </open-files>
 </project-private>

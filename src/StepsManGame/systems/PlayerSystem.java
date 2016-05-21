@@ -22,7 +22,8 @@ public class PlayerSystem implements ActionListener {
     private GameSystem gameSystem;
     private PlatformSystem platformSystem;
     private ExplosionSystem explosionSystem;
-    
+    private OnlineSystem onlineSystem;
+            
     private static PlayerTAdapter adapter;
     
     public enum Players{
@@ -37,10 +38,11 @@ public class PlayerSystem implements ActionListener {
         player2 = new Player();
     }
     
-    public void initialize(ViewsMediator viewsMediator, GameSystem gameSystem, PlatformSystem platformSystem, ExplosionSystem explosionSystem){
+    public void initialize(ViewsMediator viewsMediator, GameSystem gameSystem, PlatformSystem platformSystem, ExplosionSystem explosionSystem, OnlineSystem onlineSystem){
         this.gameSystem = gameSystem;
         this.platformSystem = platformSystem;
         this.explosionSystem = explosionSystem;
+        this.onlineSystem = onlineSystem;
         
         if (adapter == null){
             adapter = new PlayerTAdapter();
@@ -49,12 +51,38 @@ public class PlayerSystem implements ActionListener {
     }
     
     public void switchTurns() {
-        if (player1.getTurnState() == Player.TurnState.MY_TURN) {
-            player1.setState(Player.TurnState.HIS_TURN);
-            player2.setState(Player.TurnState.MY_TURN);
-        } else if (player2.getTurnState() == Player.TurnState.MY_TURN) {
-            player2.setState(Player.TurnState.HIS_TURN);
-            player1.setState(Player.TurnState.MY_TURN);
+        if (onlineSystem.getStatus()){
+            if (onlineSystem.isHost()){
+                if (player1.getTurnState() == Player.TurnState.MY_TURN) {
+                    onlineSystem.respondClient(player1.getPosition());
+                    System.out.println("passou mesmo");
+                    player1.setState(Player.TurnState.HIS_TURN);
+                    player2.setState(Player.TurnState.MY_TURN);
+                    onlineSystem.requestClient(); //requisitar prox jogada do cliente
+                    player1.setState(Player.TurnState.MY_TURN);
+                    player2.setState(Player.TurnState.HIS_TURN);
+                }
+            }
+            else {
+                if (player2.getTurnState() == Player.TurnState.MY_TURN) {
+                    onlineSystem.respondServer(player2.getPosition());
+                    System.out.println("de verdade");
+                    player2.setState(Player.TurnState.HIS_TURN);
+                    player1.setState(Player.TurnState.MY_TURN);
+                    onlineSystem.requestServer(); //requisitar prox jogada do host
+                    player2.setState(Player.TurnState.MY_TURN);
+                    player1.setState(Player.TurnState.HIS_TURN);
+                }
+            }
+        }
+        else {
+            if (player1.getTurnState() == Player.TurnState.MY_TURN) {
+                player1.setState(Player.TurnState.HIS_TURN);
+                player2.setState(Player.TurnState.MY_TURN);
+            } else if (player2.getTurnState() == Player.TurnState.MY_TURN) {
+                player2.setState(Player.TurnState.HIS_TURN);
+                player1.setState(Player.TurnState.MY_TURN);
+            }
         }
     }
 
@@ -68,6 +96,20 @@ public class PlayerSystem implements ActionListener {
         } else if (who == Players.PLAYER_2) {
             player2 = player;
         }
+    }
+    
+    public void setPoint(int player, Point point){
+        if (player == 1)
+            player1.setPosition(point);
+        else
+            player2.setPosition(point);
+    }
+    
+    public void plantSeed(int player){
+        if (player == 1)
+            platformSystem.plantSeed(player1);
+        else
+            platformSystem.plantSeed(player2);
     }
     
     @Override

@@ -7,6 +7,7 @@ package StepsManGame.logic;
 
 import StepsManGame.systems.ExplosionSystem;
 import StepsManGame.systems.GameSystem;
+import StepsManGame.systems.OnlineSystem;
 import StepsManGame.systems.PlatformSystem;
 import StepsManGame.systems.PlayerSystem;
 import StepsManGame.view.ViewsMediator;
@@ -14,6 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +32,7 @@ public class Menu implements ActionListener{
     private Selection selection;
     private GameSystem gameSystem;
     private PlayerSystem playerSystem;
+    private OnlineSystem onlineSystem;
     private PlatformSystem platformSystem;
     private ExplosionSystem explosionSystem;
     private PlayerSystem.Players winner;
@@ -39,7 +44,8 @@ public class Menu implements ActionListener{
     }
 
     public void initialize(GameSystem gameSystem, ViewsMediator viewsMediator, 
-            PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem) {
+            PlatformSystem platformSystem, PlayerSystem playerSystem, ExplosionSystem explosionSystem,
+            OnlineSystem onlineSystem) {
         
         winner = PlayerSystem.Players.NONE;
         selection = Selection.CONTINUE;
@@ -48,6 +54,7 @@ public class Menu implements ActionListener{
         this.explosionSystem = explosionSystem;
         this.platformSystem = platformSystem;
         this.playerSystem = playerSystem;
+        this.onlineSystem = onlineSystem;
         
         if (adapter == null){
             adapter = new MenuTAdapter();
@@ -129,8 +136,22 @@ public class Menu implements ActionListener{
                     gameSystem.restart();
                     break;
                 case HOST:
+                {
+                    try {
+                        onlineSystem.createServer();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
                 case CLIENT:
+                {
+                    try {
+                        onlineSystem.createClient();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
                 case EXIT:
                     System.exit(0);
